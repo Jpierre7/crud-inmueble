@@ -1,0 +1,31 @@
+{
+	"name": "C# (.NET) and MS SQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"settings": { 
+				"mssql.connections": [
+					{
+						"server": "localhost,1433",
+						"database": "CRUDINMUEBLE",
+						"authenticationType": "SqlLogin",
+						"user": "sa",
+						"password": "P@ssw0rd",
+						"emptyPasswordInput": false,
+						"savePassword": true,
+						"profileName": "mssql-container",
+						"trustServerCertificate": true
+					}
+				]
+			},
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-mssql.mssql",
+				"ms-dotnettools.csdevkit"
+			]
+		}
+	},
+	"forwardPorts": [5000, 5001, 1433]
+}

@@ -1,0 +1,6 @@
+@crud_inmueble_HostAddress = http://localhost:5128
+
+GET {{crud_inmueble_HostAddress}}/
+Accept: application/json
+
+###
