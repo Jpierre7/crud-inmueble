@@ -22,11 +22,33 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     restart: unless-stopped
     environment:
-      SA_PASSWORD: P@ssw0rd
+      MSSQL_SA_PASSWORD: P@ssw0rd
       ACCEPT_EULA: Y
+    volumes:
+      - ../mssql/:/scripts
+    command:
+      - /bin/bash
+      - -c 
+      - |
+        /opt/mssql/bin/sqlservr &
+        pid=$$!
+        /opt/mssql-tools18/bin/sqlcmd -C -l 30 -S localhost -h-1 -V1 -U sa -P $$MSSQL_SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
+        is_up=$$?
+        while [ $$is_up -ne 0 ] ; do 
+          echo -e $$(date) 
+          /opt/mssql-tools18/bin/sqlcmd -C -l 30 -S localhost -h-1 -V1 -U sa -P $$MSSQL_SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
+          is_up=$$?
+          sleep 5 
+        done
+        for foo in /scripts/*.sql
+          do /opt/mssql-tools18/bin/sqlcmd -C -U sa -P $$MSSQL_SA_PASSWORD -l 30 -e -i $$foo
+        done
+        trap "kill -15 $$pid" SIGTERM
+        wait $$pid
+        exit 0
 
     # Add "forwardPorts": ["db:1433"] to **devcontainer.json** to forward MSSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
