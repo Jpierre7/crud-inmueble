@@ -49,3 +49,76 @@ GO
 ALTER TABLE [dbo].[Inmueble]  WITH CHECK ADD FOREIGN KEY([TipoInmuebleID])
 REFERENCES [dbo].[TipoInmueble] ([TipoInmuebleID])
 GO
+
+--GET LIST INMUEBLES
+CREATE PROCEDURE SP_GETLIST_INMUEBLES
+AS
+BEGIN 
+SELECT
+	i.InmuebleID,
+	i.Direccion,
+	i.Cantidad_Habitaciones AS CantidadHabitaciones,
+	i.Estado_Inmueble AS EstadoInmueble,
+	i.Disponibilidad,
+	i.Ciudad,
+	i.Fecha_Creacion AS FechaCreacion,
+	ti.Descripcion
+FROM Inmueble i INNER JOIN TipoInmueble ti
+ON ti.TipoInmuebleID = i.TipoInmuebleID
+FOR JSON AUTO
+END;
+GO
+
+--CREATE NEW INMUEBLE
+CREATE PROCEDURE SP_INSERT_INMUEBLE 
+	@direccion nvarchar(150),
+	@cantHabitaciones int, 
+	@estadoInmueble nvarchar(50),
+	@disponibilidad nvarchar(50),
+	@ciudad nvarchar(50),
+	@tipoInmueble int
+AS
+BEGIN 
+	INSERT INTO Inmueble(Direccion, Cantidad_Habitaciones, Estado_Inmueble, Disponibilidad, Ciudad, TipoInmuebleID, Fecha_Creacion)
+	VALUES(@direccion, @cantHabitaciones, @estadoInmueble, @disponibilidad, @ciudad, @tipoInmueble, getdate())
+
+	SELECT
+		i.InmuebleID,
+		i.Direccion,
+		i.Cantidad_Habitaciones AS CantidadHabitaciones,
+		i.Estado_Inmueble AS EstadoInmueble,
+		i.Disponibilidad,
+		i.Ciudad,
+		i.Fecha_Creacion AS FechaCreacion,
+		ti.Descripcion
+	FROM Inmueble i INNER JOIN TipoInmueble ti
+		ON ti.TipoInmuebleID = i.TipoInmuebleID
+	WHERE InmuebleID = SCOPE_IDENTITY()
+	FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+END;
+GO
+
+--UPDATE INMUEBLE 
+CREATE PROCEDURE SP_UPDATE_INMUEBLE 
+	@idInmueble int, 
+	@direccion nvarchar(150),
+	@cantHabitaciones int, 
+	@estadoInmueble nvarchar(50),
+	@disponibilidad nvarchar(50),
+	@ciudad nvarchar(50),
+	@tipoInmueble int
+AS
+BEGIN
+	UPDATE Inmueble
+	SET Direccion = @direccion, Cantidad_Habitaciones = @cantHabitaciones, Estado_Inmueble = @estadoInmueble, Disponibilidad = @disponibilidad, Ciudad = @ciudad, TipoInmuebleID = @tipoInmueble
+	WHERE InmuebleID = @idInmueble
+END;
+GO
+
+--DELETE INMUEBLE
+CREATE PROCEDURE SP_DELETE_INMUEBLE 
+@idInmueble int 
+AS
+BEGIN
+DELETE FROM Inmueble WHERE InmuebleID = @idInmueble
+END;
