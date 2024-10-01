@@ -9,8 +9,9 @@ public class Inmueble
     public string Disponibilidad { get; set; }
     public string Ciudad { get; set; }
     public DateTime FechaCreacion { get; set; }
+    public TipoInmueble Tipo { get; set; }
 
-    public Inmueble(int inmuebleID, string direccion, int cantidadHabitaciones, string estadoInmueble, string disponibilidad, string ciudad, DateTime fechaCreacion)
+    public Inmueble(int inmuebleID, string direccion, int cantidadHabitaciones, string estadoInmueble, string disponibilidad, string ciudad, DateTime fechaCreacion, TipoInmueble tipo)
     {
         InmuebleID = inmuebleID;
         Direccion = direccion;
@@ -19,5 +20,6 @@ public class Inmueble
         Disponibilidad = disponibilidad;
         Ciudad = ciudad;
         FechaCreacion = fechaCreacion;
+        Tipo = tipo;
     }
 }
