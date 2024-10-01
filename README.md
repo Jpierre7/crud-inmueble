@@ -37,7 +37,7 @@ Esta aplicación es un crud completo de Inmuebles, implementado con minimal api 
 6. Probar en postman los endpoint, agregar una variable de entorno con nombre API_URL con el valor http://localhost:5128
 
 ## ENDPOINTS
-- GET: http://localhost:5128/inmuebles
-- POST: http://localhost:5128/inmuebles
-- UPDATE: http://localhost:5128/inmuebles/{id}
-- DELETE: http://localhost:5128/inmuebles/{id}
+- GET: http://localhost:5128/inmueble
+- POST: http://localhost:5128/inmueble
+- UPDATE: http://localhost:5128/inmueble/{id}
+- DELETE: http://localhost:5128/inmueble/{id}
