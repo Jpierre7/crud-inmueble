@@ -36,6 +36,8 @@ Esta aplicación es un crud completo de Inmuebles, implementado con minimal api 
 
 6. Probar en postman los endpoint, agregar una variable de entorno con nombre API_URL con el valor http://localhost:5128
 
+7. La colección de postman esta dentro del proyecto con nombre de CRUD-INMUEBLE.postman_collection.json
+
 ## ENDPOINTS
 - GET: http://localhost:5128/inmueble
 - POST: http://localhost:5128/inmueble
