@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "8a332224-792c-4713-8ce4-ced4d932ed83",
+		"name": "CRUD-INMUEBLE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20974438"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Get List Inmueble",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/inmueble",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"inmueble"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "INSERT",
+			"item": [
+				{
+					"name": "Insertar Inmueble",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"direccion\": \"Av. Juan Pablo\",\n  \"cantidadHabitaciones\": 7,\n  \"estadoInmueble\": \"Usado\",\n  \"disponibilidad\": \"Disponible\",\n  \"ciudad\": \"Trujillo\",\n  \"tipoInmuebleID\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/inmueble",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"inmueble"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UPDATE",
+			"item": [
+				{
+					"name": "Update Inmueble",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"direccion\": \"Av. Ricardo Palma\",\n  \"cantidadHabitaciones\": 2,\n  \"estadoInmueble\": \"Nuevo\",\n  \"disponibilidad\": \"Alquilado\",\n  \"ciudad\": \"Arequipa\",\n  \"tipoInmuebleID\": 4\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/inmueble/5",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"inmueble",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Delete Inmueble",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/inmueble/5",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"inmueble",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
