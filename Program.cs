@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", (MsSQLConnection connection) =>
+app.MapGet("/inmueble", (MsSQLConnection connection) =>
 {
     return connection.GetList<Inmueble>("dbo.SP_GETLIST_INMUEBLES", null);
 })
